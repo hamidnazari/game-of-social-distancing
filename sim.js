@@ -1,15 +1,16 @@
 let Sim = (function() {
   const MAX_STEPS = 365 * 3;
 
-  function Sim(rows, cols) {
+  function Sim(rows, cols, density) {
     this.currentStep = 0;
     this.rows = rows;
     this.cols = cols;
+    this.density = density;
     this.agents = [];
 
     for (let i = 0; i < cols; ++i) {
       for (let j = 0; j < rows; ++j) {
-        if (Math.random() >= 0.7) {
+        if (Math.random() >= this.density) {
           let agent = new Agent(i, j);
           this.agents.push(agent);
         }

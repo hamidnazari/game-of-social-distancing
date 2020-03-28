@@ -5,7 +5,7 @@ let Agent = (function() {
   }
 
   Agent.prototype.step = function() {
-    ++this.x;
+
   }
 
   return Agent;

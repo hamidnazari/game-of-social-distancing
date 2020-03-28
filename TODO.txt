@@ -1,0 +1,8 @@
+[ ] Add seeding for Random
+[ ] Use PIXI timer?
+[ ] Colors: Metro UI Colors
+    0xE6E6EA // gray
+    0xF4F4F8 // white
+    0x0392cf // blue
+    0xee4035 // red
+    0xffc425 // yellow
