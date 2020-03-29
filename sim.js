@@ -1,7 +1,7 @@
 let Sim = (function() {
   const MAX_STEPS = 365 * 3;
   const DENSITY = 0.2;
-  const INITIAL_INFECTIONS = 0.05;
+  const UNWELLS = 0.005;
 
   function Sim(rows, cols) {
     this.currentStep = 0;
@@ -12,13 +12,12 @@ let Sim = (function() {
     for (let i = 0; i < rows; ++i) {
       for (let j = 0; j < cols; ++j) {
         if (RNG.randTrue(DENSITY)) {
-          let agent = new Agent(j, i, 0);
+          let health = RNG.randTrue(UNWELLS) ? 1 : 0;
+          let agent = new Agent(j, i, health);
           this.agents.push(agent);
         }
       }
     }
-
-    console.log(this.agents.length)
   }
 
   Sim.prototype._updateStep = function() {

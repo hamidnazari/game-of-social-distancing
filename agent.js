@@ -19,9 +19,19 @@ let Agent = (function() {
     return this.health == 1;
   }
 
+  /*
+    Directions:
+      0  1  2
+      3  4  5
+      6  7  8
+  */
   Agent.prototype.step = function() {
-    // ++this.x;
-    // ++this.y;
+    let direction = RNG.randInteger(0, 9);
+
+    if (direction <= 2) --this.y;
+    if (direction >= 6) ++this.y;
+    if (direction % 3 == 0) --this.x;
+    if (direction % 3 == 2) ++this.x;
   }
 
   return Agent;

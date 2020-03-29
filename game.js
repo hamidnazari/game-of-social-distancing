@@ -55,15 +55,15 @@
   }
 
   const drawAgents = () => {
-    gfx.lineStyle(0).beginFill(0x0392CF);
+    gfx.lineStyle(0);
+
     sim.agents.forEach(agent => {
-      if (agent.isSick()) {
-        gfx.beginFill(0XFFC425);
-      }
-      gfx.drawCircle(
-        (agent.x + .5) * CELL_SIZE,
-        (agent.y + .5) * CELL_SIZE,
-        CELL_SIZE / 3,
+      let color = agent.isSick() ? 0xFCA903 : 0x0392CF;
+      gfx.beginFill(color)
+         .drawCircle(
+           (agent.x + .5) * CELL_SIZE,
+           (agent.y + .5) * CELL_SIZE,
+           CELL_SIZE / 3,
       );
     });
     gfx.endFill();
