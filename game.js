@@ -3,7 +3,6 @@
   const COLS = 128;
   const CELL_SIZE = 10;
   const SPEED = 1000;
-  const DENSITY = 0.4;
 
   let speedModifier = 0.5;
   let timeout = SPEED * speedModifier;
@@ -15,8 +14,7 @@
   }
 
   const setup = () => {
-    sim = new Sim(ROWS, COLS, DENSITY);
-    console.log(sim.agents.length);
+    sim = new Sim(ROWS, COLS);
     setupCanvas();
     window.setInterval(tick, timeout);
     tick();
@@ -57,10 +55,11 @@
   }
 
   const drawAgents = () => {
-    gfx.lineStyle(0)
-       .beginFill(0x0392CF);
-
+    gfx.lineStyle(0).beginFill(0x0392CF);
     sim.agents.forEach(agent => {
+      if (agent.isSick()) {
+        gfx.beginFill(0XFFC425);
+      }
       gfx.drawCircle(
         (agent.x + .5) * CELL_SIZE,
         (agent.y + .5) * CELL_SIZE,
