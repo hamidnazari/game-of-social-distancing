@@ -8,10 +8,10 @@ let Sim = (function() {
     this.density = density;
     this.agents = [];
 
-    for (let i = 0; i < cols; ++i) {
-      for (let j = 0; j < rows; ++j) {
-        if (Math.random() >= this.density) {
-          let agent = new Agent(i, j);
+    for (let i = 0; i < rows; ++i) {
+      for (let j = 0; j < cols; ++j) {
+        if (Math.random() >= (1-this.density)) {
+          let agent = new Agent(j, i);
           this.agents.push(agent);
         }
       }

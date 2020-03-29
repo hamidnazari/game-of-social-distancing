@@ -2,8 +2,8 @@
   const ROWS = 80;
   const COLS = 128;
   const CELL_SIZE = 10;
-
   const SPEED = 1000;
+  const DENSITY = 0.4;
 
   let speedModifier = 0.5;
   let timeout = SPEED * speedModifier;
@@ -15,10 +15,9 @@
   }
 
   const setup = () => {
-    setupCanvas();
-    sim = new Sim(ROWS, COLS, 0.6);
+    sim = new Sim(ROWS, COLS, DENSITY);
     console.log(sim.agents.length);
-
+    setupCanvas();
     window.setInterval(tick, timeout);
     tick();
   }
@@ -27,10 +26,11 @@
     pixi = new PIXI.Application({
       width: COLS * CELL_SIZE,
       height: ROWS * CELL_SIZE,
+      antialias: true,
       backgroundColor: 0xE6E6EA
     });
 
-    // TODO: mvoe to their own class
+    // TODO: move to their own class
     const grid = new PIXI.Container();
     const agents = new PIXI.Container();
     pixi.stage.addChild(grid);
@@ -57,22 +57,27 @@
   }
 
   const drawAgents = () => {
+    gfx.lineStyle(0)
+       .beginFill(0x0392CF);
+
     sim.agents.forEach(agent => {
-      gfx.beginFill(0x0392CF);
-      gfx.drawRect(
-        agent.x * CELL_SIZE + 2,
-        agent.y * CELL_SIZE + 2,
-        CELL_SIZE - 4,
-        CELL_SIZE - 4
+      gfx.drawCircle(
+        (agent.x + .5) * CELL_SIZE,
+        (agent.y + .5) * CELL_SIZE,
+        CELL_SIZE / 3,
       );
-      gfx.endFill();
     });
+    gfx.endFill();
   }
 
   const draw = () => {
     gfx.clear();
     drawGrid();
     drawAgents();
+
+    // Workaround: https://github.com/pixijs/pixi.js/wiki/v5-Hacks#removing-65k-vertices-limitation
+    gfx.geometry.updateBatches();
+    gfx.geometry._indexBuffer.update(new Uint32Array(gfx.geometry.indices));
   }
 
   setup();
