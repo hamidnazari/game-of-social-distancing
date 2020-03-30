@@ -4,7 +4,7 @@
   const CELL_SIZE = 10;
   const SPEED = 1000;
 
-  let speedModifier = 10;
+  let speedModifier = 2;
   let timeout = SPEED / speedModifier;
   let pixi, gfx, sim;
 

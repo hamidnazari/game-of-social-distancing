@@ -1,7 +1,7 @@
 let Sim = (() => {
   const MAX_STEPS = 365 * 3;
-  const DENSITY_RATE = 0.2;
-  const INFECTED_RATE = 0.001;
+  const DENSITY_RATE = 0.5;
+  const INFECTED_RATE = 0.005;
 
   function Sim(cols, rows) {
     this.currentStep = 0;
