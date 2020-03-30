@@ -3,12 +3,15 @@
 [ ] Colors: Metro UI Colors
     0xE6E6EA // gray
     0xF4F4F8 // white
-    0X0392CF // blue
-    0XEE4035 // red
-    0XFFC425 // yellow
+    0x0392CF // blue
+    0xEE4035 // red
+    0xFFC425 // yellow
 [X] fix last agent line style bug
 [ ] Add live metrics
+[ ] Add controls UI
 [X] Add boundaries to Agent?
 [ ] Add enums
 [ ] Add recoverability
-[ ] Add death
+[X] Add death
+[ ] Add asymptomatic/symptomatic
+[ ] put grid and agents in their own pixi containers

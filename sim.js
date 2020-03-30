@@ -1,7 +1,7 @@
 let Sim = (function() {
   const MAX_STEPS = 365 * 3;
-  const DENSITY = 0.20;
-  const UNWELLS = 0.005;
+  const DENSITY_RATE = 0.20;
+  const INFECTED_RATE = 0.005;
 
   function Sim(cols, rows) {
     this.currentStep = 0;
@@ -14,8 +14,8 @@ let Sim = (function() {
     agents = [];
     for (let i = 0; i < rows; ++i) {
       for (let j = 0; j < cols; ++j) {
-        if (RNG.randTrue(DENSITY)) {
-          let health = RNG.randTrue(UNWELLS) ? 1 : 0;
+        if (RNG.randTrue(DENSITY_RATE)) {
+          let health = RNG.randTrue(INFECTED_RATE) ? 1 : 0;
           let agent = new Agent(j, i, health);
           agents.push(agent);
         }
@@ -34,21 +34,19 @@ let Sim = (function() {
       return state;
     }, {});
 
-    const overlapped = Object.values(placements).filter(p => p.length > 1);
+    const closeContacts = Object.values(placements).filter(p => p.length > 1);
 
-    overlapped.forEach(idiots => {
-      if (idiots.find(idiot => idiot.isSick())) {
+    closeContacts.forEach(idiots => {
+      if (idiots.find(idiot => idiot.isInfected())) {
         idiots.forEach(fucked => fucked.health = 1)
       }
     })
-
-    return overlapped;
   }
 
   Sim.prototype.update = function() {
     if (this.currentStep >= MAX_STEPS) return;
 
-    this.agents.forEach(agent => agent.step(this.cols, this.rows))
+    this.agents.forEach(agent => agent.update(this.cols, this.rows))
 
     _doTransmissions(agents, this.cols);
 

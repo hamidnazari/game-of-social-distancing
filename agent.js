@@ -1,26 +1,43 @@
 let Agent = (function() {
+  const DEAD_AFTER = 30;
+
   /*
     Health statuses:
       0 WELL
-      1 UNWELL
+      1 INFECTED
       2 DEAD
   */
   function Agent(x, y, health) {
     this.x = x;
     this.y = y;
+    this.daysInfected = 0;
     this.health = health;
-  }
-
-  Agent.prototype._getDirection = function() {
-    // Math.random()
   }
 
   Agent.prototype.getPosition = function(cols) {
     return this.x + this.y * cols;
   }
 
-  Agent.prototype.isSick = function() {
+  Agent.prototype.isInfected = function() {
     return this.health == 1;
+  }
+
+  Agent.prototype.isDead = function() {
+    return this.health == 2;
+  }
+
+  Agent.prototype.deteriorate = function() {
+    if (this.isInfected()) ++this.daysInfected;
+
+    if (this.daysInfected >= DEAD_AFTER) {
+      this.health = 2;
+    }
+  }
+
+
+  Agent.prototype.update = function(cols, rows) {
+    this.deteriorate();
+    this.step(cols, rows);
   }
 
   /*
@@ -30,6 +47,8 @@ let Agent = (function() {
       6  7  8
   */
   Agent.prototype.step = function(cols, rows) {
+    if (this.isDead()) return;
+
     let direction = RNG.randInteger(0, 9);
 
     if (direction % 3 == 0) --this.x;

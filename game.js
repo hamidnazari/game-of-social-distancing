@@ -4,7 +4,7 @@
   const CELL_SIZE = 10;
   const SPEED = 1000;
 
-  let speedModifier = 1;
+  let speedModifier = 5;
   let timeout = SPEED / speedModifier;
   let pixi, gfx, sim;
 
@@ -25,8 +25,7 @@
       width: COLS * CELL_SIZE,
       height: ROWS * CELL_SIZE,
       antialias: true,
-      // backgroundColor: 0xE6E6EA,
-      backgroundColor: 0x777777
+      backgroundColor: 0xE6E6EA
     });
 
     // TODO: move to their own class
@@ -42,7 +41,7 @@
   }
 
   const drawGrid = () => {
-    // gfx.lineStyle(1, 0xF4F4F8);
+    gfx.lineStyle(1, 0xF4F4F8);
 
     for (let i = 1; i < COLS; ++i) {
       gfx.moveTo(i*CELL_SIZE, 0)
@@ -59,8 +58,7 @@
     gfx.lineStyle(0);
 
     sim.agents.forEach(agent => {
-      let color = agent.isSick() ? 0xFCA903 : 0x0392CF;
-      gfx.beginFill(color)
+      gfx.beginFill(getAgentColour(agent))
          .drawCircle(
            (agent.x + .5) * CELL_SIZE,
            (agent.y + .5) * CELL_SIZE,
@@ -68,6 +66,19 @@
       );
     });
     gfx.endFill();
+  }
+
+  const getAgentColour = (agent) => {
+    let colour = 0x0392CF;
+
+    if (agent.isInfected()) {
+      colour = 0xFCA903;
+    } else if (agent.isDead()) {
+      // colour = 0XEE4035;
+      colour = 0x000000;
+    }
+
+    return colour;
   }
 
   const draw = () => {
