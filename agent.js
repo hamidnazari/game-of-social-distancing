@@ -1,5 +1,6 @@
-let Agent = (function() {
-  const DEAD_AFTER = 30;
+let Agent = (() => {
+  const MAX_INFECTED_DAYS = 30;
+  const MAX_DEAD_DAYS = 10;
 
   /*
     Health statuses:
@@ -11,7 +12,9 @@ let Agent = (function() {
     this.x = x;
     this.y = y;
     this.daysInfected = 0;
+    this.daysDead = 0;
     this.health = health;
+    this.active = true;
   }
 
   Agent.prototype.getPosition = function(cols) {
@@ -26,11 +29,27 @@ let Agent = (function() {
     return this.health == 2;
   }
 
-  Agent.prototype.deteriorate = function() {
-    if (this.isInfected()) ++this.daysInfected;
+  Agent.prototype.isActive = function() {
+    return this.active;
+  }
 
-    if (this.daysInfected >= DEAD_AFTER) {
-      this.health = 2;
+  Agent.prototype.deteriorate = function() {
+    if (this.isDead()) {
+      ++this.daysDead;
+
+      if (this.daysDead >= MAX_DEAD_DAYS) {
+        this.active = false;
+      }
+
+      return;
+    }
+
+    if (this.isInfected()) {
+      ++this.daysInfected;
+
+      if (this.daysInfected >= MAX_INFECTED_DAYS) {
+        this.health = 2;
+      }
     }
   }
 

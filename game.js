@@ -1,10 +1,10 @@
-(function() {
+(() => {
   const ROWS = 80;
   const COLS = 128;
   const CELL_SIZE = 10;
   const SPEED = 1000;
 
-  let speedModifier = 5;
+  let speedModifier = 10;
   let timeout = SPEED / speedModifier;
   let pixi, gfx, sim;
 
@@ -17,7 +17,7 @@
     sim = new Sim(COLS, ROWS);
     setupCanvas();
     window.setInterval(tick, timeout);
-    tick();
+    draw();
   }
 
   const setupCanvas = () => {
@@ -58,6 +58,8 @@
     gfx.lineStyle(0);
 
     sim.agents.forEach(agent => {
+      if (!agent.isActive()) return;
+
       gfx.beginFill(getAgentColour(agent))
          .drawCircle(
            (agent.x + .5) * CELL_SIZE,

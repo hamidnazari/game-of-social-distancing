@@ -1,5 +1,5 @@
-var RNG = (function() {
-  const SEED = 0;
+var RNG = (() => {
+  const SEED = 'CoViD-19';
 
   const rng = new Math.seedrandom(SEED);
 
