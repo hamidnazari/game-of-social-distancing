@@ -4,8 +4,8 @@
   const CELL_SIZE = 10;
   const SPEED = 1000;
 
-  let speedModifier = 0.5;
-  let timeout = SPEED * speedModifier;
+  let speedModifier = 1;
+  let timeout = SPEED / speedModifier;
   let pixi, gfx, sim;
 
   const tick = () => {
@@ -14,7 +14,7 @@
   }
 
   const setup = () => {
-    sim = new Sim(ROWS, COLS);
+    sim = new Sim(COLS, ROWS);
     setupCanvas();
     window.setInterval(tick, timeout);
     tick();
@@ -25,7 +25,8 @@
       width: COLS * CELL_SIZE,
       height: ROWS * CELL_SIZE,
       antialias: true,
-      backgroundColor: 0xE6E6EA
+      // backgroundColor: 0xE6E6EA,
+      backgroundColor: 0x777777
     });
 
     // TODO: move to their own class
@@ -41,7 +42,7 @@
   }
 
   const drawGrid = () => {
-    gfx.lineStyle(1, 0xF4F4F8);
+    // gfx.lineStyle(1, 0xF4F4F8);
 
     for (let i = 1; i < COLS; ++i) {
       gfx.moveTo(i*CELL_SIZE, 0)
