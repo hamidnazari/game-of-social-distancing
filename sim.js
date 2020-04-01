@@ -14,8 +14,15 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
         }
       }
     }
-
     return agents;
+  };
+
+  const _count = (sim) => {
+    sim.agentInfectedCount = sim.agents.filter((a) => a.isInfected()).length;
+    sim.agentDeadCount = sim.agents.filter((a) => a.isDead()).length;
+    sim.agentBuriedCount = sim.agents.filter((a) => a.isBuried()).length;
+    sim.agentAliveCount = sim.agentCount - sim.agentDeadCount - sim.agentBuriedCount;
+    sim.agentHealthyCount = sim.agentAliveCount - sim.agentInfectedCount;
   };
 
   function _Sim(cols, rows) {
@@ -23,11 +30,13 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
     this.cols = cols;
     this.rows = rows;
     this.agents = _initAgents(cols, rows);
+    this.agentCount = this.agents.length;
+    _count(this);
   }
 
-  const _doTransmissions = (agents, cols) => {
-    const placements = agents.reduce((state, agent) => {
-      const position = agent.getPosition(cols);
+  const _doTransmissions = (sim) => {
+    const placements = sim.agents.reduce((state, agent) => {
+      const position = agent.getPosition(sim.cols);
       if (!state[position]) {
         state[position] = [];
       }
@@ -36,7 +45,6 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
     }, {});
 
     const closeContacts = Object.values(placements).filter((p) => p.length > 1);
-
     closeContacts.forEach((idiots) => {
       if (idiots.find((idiot) => idiot.isInfected())) {
         idiots.forEach((fucked) => { fucked.health = 1; });
@@ -49,7 +57,8 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
 
     this.agents.forEach((agent) => agent.update(this.cols, this.rows));
 
-    _doTransmissions(this.agents, this.cols);
+    _doTransmissions(this);
+    _count(this);
 
     this.currentStep += 1;
   };

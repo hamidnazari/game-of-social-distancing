@@ -7,6 +7,7 @@ const Agent = (() => { // eslint-disable-line no-unused-vars
       0 WELL
       1 INFECTED
       2 DEAD
+      3 BURIED
   */
   function _Agent(x, y, health) {
     this.x = x;
@@ -14,7 +15,6 @@ const Agent = (() => { // eslint-disable-line no-unused-vars
     this.daysInfected = 0;
     this.daysDead = 0;
     this.health = health;
-    this.active = true;
   }
 
   _Agent.prototype.getPosition = function getPosition(cols) {
@@ -29,8 +29,8 @@ const Agent = (() => { // eslint-disable-line no-unused-vars
     return this.health === 2;
   };
 
-  _Agent.prototype.isActive = function isActive() {
-    return this.active;
+  _Agent.prototype.isBuried = function isBuried() {
+    return this.health === 3;
   };
 
   _Agent.prototype.deteriorate = function deteriorate() {
@@ -38,7 +38,7 @@ const Agent = (() => { // eslint-disable-line no-unused-vars
       this.daysDead += 1;
 
       if (this.daysDead >= MAX_DEAD_DAYS) {
-        this.active = false;
+        this.health = 3;
       }
 
       return;

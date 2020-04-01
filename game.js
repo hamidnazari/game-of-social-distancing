@@ -4,7 +4,7 @@
   const CELL_SIZE = 10;
   const SPEED = 1000;
 
-  const speedModifier = 2;
+  const speedModifier = 100;
   const timeout = SPEED / speedModifier;
   let gfx;
   let sim;
@@ -20,7 +20,7 @@
     gfx = new PIXI.Graphics();
     pixi.stage.addChild(gfx);
 
-    document.body.appendChild(pixi.view);
+    document.getElementById('pixi').appendChild(pixi.view);
   };
 
   const drawGrid = () => {
@@ -53,7 +53,7 @@
     gfx.lineStyle(0);
 
     sim.agents.forEach((agent) => {
-      if (!agent.isActive()) return;
+      if (agent.isBuried()) return;
 
       gfx.beginFill(getAgentColour(agent))
         .drawCircle(
@@ -75,16 +75,21 @@
     gfx.geometry._indexBuffer.update(new Uint32Array(gfx.geometry.indices));
   };
 
+  const render = () => {
+    Metrics.print(sim);
+    draw();
+  };
+
   const tick = () => {
     sim.update();
-    draw();
+    render();
   };
 
   const setup = () => {
     sim = new Sim(COLS, ROWS);
     setupCanvas();
     window.setInterval(tick, timeout);
-    draw();
+    render();
   };
 
   setup();

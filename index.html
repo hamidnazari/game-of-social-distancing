@@ -11,10 +11,30 @@
 </head>
 <body>
   <h1>Game of Social Distancing</h1>
-  <div id="canvas"></div>
-  <script src="rng.js?v=1.0"></script>
-  <script src="agent.js?v=1.0"></script>
-  <script src="sim.js?v=1.0"></script>
-  <script src="game.js?v=1.0"></script>
+
+  <!-- <p id="controls">
+    Density Rate: <input type="text" name="density_rate" /> |
+    Infected Rate: <input type="text" name="infected_rate" /> |
+    Speed Modifier: <input type="text" name="speed_modifier" /> |
+    <input type="button" name="restart" value="Restart" />
+  </p> -->
+
+  <p id="metrics">
+    People Count: <span id="people_count"></span> |
+    Alive Count: <span id="alive_count"></span> |
+    Healthy Count: <span id="healthy_count"></span> |
+    Infected Count: <span id="infected_count"></span> |
+    Dead Count: <span id="dead_count"></span> |
+    Buried Count: <span id="buried_count"></span> |
+    Day Number: <span id="day_number"></span>
+  </p>
+
+  <div id="pixi"></div>
+
+  <script src="rng.js?v=0.1.0"></script>
+  <script src="agent.js?v=0.1.0"></script>
+  <script src="sim.js?v=0.1.0"></script>
+  <script src="metrics.js?v=0.1.0"></script>
+  <script src="game.js?v=0.1.0"></script>
 </body>
 </html>
