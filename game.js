@@ -1,22 +1,24 @@
 (() => {
   const COLS = 128;
   const ROWS = 80;
-  const SPEED = 1000;
 
-  const speedModifier = 2;
-  const timeout = SPEED / speedModifier;
-  let sim;
+  let _sim;
 
-  const tick = () => {
-    sim.update();
+  const _tick = () => {
+    _sim.update();
+    UI.render();
+  };
+
+  const _restart = () => {
+    _sim = new Sim(COLS, ROWS);
+    UI.setSim(_sim);
     UI.render();
   };
 
   const setup = () => {
-    sim = new Sim(COLS, ROWS);
-    UI.setup(sim);
+    _sim = new Sim(COLS, ROWS);
+    UI.setup(_sim, _tick, _restart, true);
     UI.render();
-    window.setInterval(tick, timeout);
   };
 
   setup();

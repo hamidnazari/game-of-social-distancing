@@ -1,24 +1,42 @@
 const UI = (() => { // eslint-disable-line no-unused-vars
   const CELL_SIZE = 8;
+  const SPEED = 1000;
+
+  const _speedModifier = 2;
+  const _timeout = SPEED / _speedModifier;
+
   let _sim;
   let _gfx;
+  let _timer;
 
-  const _setup = (sim) => {
-    _sim = sim;
+  const _setTimer = (tick) => {
+    if (_timer) {
+      window.clearInterval(_timer);
+    }
+    _timer = window.setInterval(tick, _timeout);
+  };
 
+  const _setupCanvas = () => {
     const pixi = new PIXI.Application({
-      width: sim.cols * CELL_SIZE,
-      height: sim.rows * CELL_SIZE,
+      width: _sim.cols * CELL_SIZE,
+      height: _sim.rows * CELL_SIZE,
       antialias: true,
       backgroundColor: 0xE6E6EA,
     });
-
+    document.getElementById('pixi').appendChild(pixi.view);
     _gfx = new PIXI.Graphics();
     pixi.stage.addChild(_gfx);
+  };
 
-    document.getElementById('pixi').appendChild(pixi.view);
+  const _setup = (sim, gameTick, restartHandler) => {
+    _sim = sim;
+    _setupCanvas();
+    document.getElementById('restart').onclick = restartHandler;
+    _setTimer(gameTick);
+  };
 
-    return _gfx;
+  const _setSim = (sim) => {
+    _sim = sim;
   };
 
   const _setValue = function _setValue(id, value) {
@@ -95,5 +113,6 @@ const UI = (() => { // eslint-disable-line no-unused-vars
   return {
     setup: _setup,
     render: _render,
+    setSim: _setSim,
   };
 })();

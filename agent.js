@@ -53,7 +53,6 @@ const Agent = (() => { // eslint-disable-line no-unused-vars
     }
   };
 
-
   _Agent.prototype.update = function update(cols, rows) {
     this.deteriorate();
     this.step(cols, rows);
