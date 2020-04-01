@@ -1,0 +1,25 @@
+{
+  "name": "game-of-social-distancing",
+  "version": "0.1.0",
+  "description": "Game of Social Distancing",
+  "main": "game.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2"
+  },
+  "scripts": {
+    "test": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hamidnazari/game-of-social-distancing.git"
+  },
+  "author": "Hamid Nazari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hamidnazari/game-of-social-distancing/issues"
+  },
+  "homepage": "https://github.com/hamidnazari/game-of-social-distancing#readme"
+}

@@ -1,12 +1,12 @@
 [X] Add seeding for Random
-[-] Use PIXI timer?
+[/] Use PIXI timer?
 [ ] Colors: Metro UI Colors
     0xE6E6EA // gray
     0xF4F4F8 // white
     0x0392CF // blue
     0xEE4035 // red
     0xFFC425 // yellow
-[X] fix last agent line style bug
+[X] Fix last agent line style bug
 [ ] Add live metrics
 [ ] Add controls UI
 [X] Add boundaries to Agent?
@@ -14,5 +14,6 @@
 [ ] Add recoverability
 [X] Add death
 [ ] Add asymptomatic/symptomatic
-[ ] put grid and agents in their own pixi containers
+[ ] Put grid and agents in their own pixi containers
 [ ] Fix the density bug
+[ ] Build a nicer user interface
