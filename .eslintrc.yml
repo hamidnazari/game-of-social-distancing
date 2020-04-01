@@ -7,7 +7,7 @@ globals:
   RNG: readonly
   PIXI: readonly
   Sim: readonly
-  Metrics: readonly
+  UI: readonly
   Agent: readonly
 parserOptions:
   ecmaVersion: 2018

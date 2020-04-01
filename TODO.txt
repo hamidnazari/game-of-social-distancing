@@ -8,7 +8,7 @@
     0xEE4035 // red
     0xFFC425 // yellow
 [X] Fix last agent line style bug
-[ ] Add live metrics
+[X] Add live metrics
 [ ] Add controls UI
 [X] Add boundaries to Agent?
 [ ] Add enums
@@ -22,3 +22,4 @@
     pixi.stage.addChild(agents);
 [/] Fix the density bug (wasn't a bug)
 [ ] Build a nicer user interface
+[ ] Stop sim after all agents are dead
