@@ -10,24 +10,24 @@
   <script src="lib/seedrandom.min.js"></script>
 </head>
 <body>
-  <h1>Game of Social Distancing</h1>
+  <h1>Game of Social Distancing (alpha)</h1>
 
   <p id="controls">
-    Density Rate: <input type="text" id="density_rate" /> |
-    Initial Infected Rate: <input type="text" id="infected_rate" /> |
-    Speed Modifier: <input type="text" id="speed_modifier" /> |
-    Random Seed: <input type="text" id="random_seed" /> |
+    <strong>Density Rate:</strong> <input type="text" id="density_rate" value="0.5" /> |
+    <strong>Initial Infected Rate:</strong> <input type="text" id="infected_rate" value="0.001" /> |
+    <strong>Speed Modifier:</strong> <input type="text" id="speed_modifier" value="2" /> |
+    <!-- <strong>Random Seed:</strong> <input type="text" id="random_seed" value="CoViD-19" /> | -->
     <input type="button" id="restart" value="Restart" />
   </p>
 
   <p id="metrics">
-    People Count: <span id="people_count"></span> |
-    Alive Count: <span id="alive_count"></span> |
-    Healthy Count: <span id="healthy_count"></span> |
-    Infected Count: <span id="infected_count"></span> |
-    Dead Count: <span id="dead_count"></span> |
-    Buried Count: <span id="buried_count"></span> |
-    Day Number: <span id="day_number"></span>
+    <strong>People Count:</strong> <span id="people_count"></span> |
+    <strong>Alive Count:</strong> <span id="alive_count"></span> |
+    <strong>Healthy Count:</strong> <span id="healthy_count"></span> |
+    <strong>Infected Count:</strong> <span id="infected_count"></span> |
+    <strong>Dead Count:</strong> <span id="dead_count"></span> |
+    <strong>Buried Count:</strong> <span id="buried_count"></span> |
+    <strong>Day Number:</strong> <span id="day_number"></span>
   </p>
 
   <div id="pixi"></div>

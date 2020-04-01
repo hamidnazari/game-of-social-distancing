@@ -10,13 +10,13 @@
   };
 
   const _restart = () => {
-    _sim = new Sim(COLS, ROWS);
+    _sim = new Sim(COLS, ROWS, UI.inputs.densityRate(), UI.inputs.infectedRate());
     UI.setSim(_sim);
     UI.render();
   };
 
   const setup = () => {
-    _sim = new Sim(COLS, ROWS);
+    _sim = new Sim(COLS, ROWS, UI.inputs.densityRate(), UI.inputs.infectedRate());
     UI.setup(_sim, _tick, _restart, true);
     UI.render();
   };

@@ -1,14 +1,12 @@
 const Sim = (() => { // eslint-disable-line no-unused-vars
   const MAX_STEPS = 365 * 3;
-  const DENSITY_RATE = 0.5;
-  const INFECTED_RATE = 0.005;
 
-  const _initAgents = (cols, rows) => {
+  const _initAgents = (cols, rows, densityRate, infectedRate) => {
     const agents = [];
     for (let i = 0; i < rows; ++i) {
       for (let j = 0; j < cols; ++j) {
-        if (RNG.randTrue(DENSITY_RATE)) {
-          const health = RNG.randTrue(INFECTED_RATE) ? 1 : 0;
+        if (RNG.randTrue(densityRate)) {
+          const health = RNG.randTrue(infectedRate) ? 1 : 0;
           const agent = new Agent(j, i, health);
           agents.push(agent);
         }
@@ -32,11 +30,11 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
     sim.agentHealthyCount = sim.agentAliveCount - sim.agentInfectedCount;
   };
 
-  function _Sim(cols, rows) {
+  function _Sim(cols, rows, densityRate, infectedRate) {
     this.currentStep = 0;
     this.cols = cols;
     this.rows = rows;
-    this.agents = _initAgents(cols, rows);
+    this.agents = _initAgents(cols, rows, densityRate, infectedRate);
     this.agentCount = this.agents.length;
     _count(this);
   }

@@ -1,19 +1,18 @@
 const UI = (() => { // eslint-disable-line no-unused-vars
   const CELL_SIZE = 8;
-  const SPEED = 1000;
-
-  const _speedModifier = 2;
-  const _timeout = SPEED / _speedModifier;
+  const SPEED_COEFF = 1000;
 
   let _sim;
   let _gfx;
+  let _gameTick;
   let _timer;
 
-  const _setTimer = (tick) => {
+  const _setTimer = () => {
     if (_timer) {
       window.clearInterval(_timer);
     }
-    _timer = window.setInterval(tick, _timeout);
+    const milliseconds = SPEED_COEFF / UI.inputs.speedModifier();
+    _timer = window.setInterval(_gameTick, milliseconds);
   };
 
   const _setupCanvas = () => {
@@ -32,25 +31,27 @@ const UI = (() => { // eslint-disable-line no-unused-vars
     _sim = sim;
     _setupCanvas();
     document.getElementById('restart').onclick = restartHandler;
-    _setTimer(gameTick);
+    _gameTick = gameTick;
+    _setTimer();
   };
 
   const _setSim = (sim) => {
     _sim = sim;
+    _setTimer();
   };
 
-  const _setValue = function _setValue(id, value) {
-    document.getElementById(id).innerText = value;
-  };
+  const _getValue = (id) => document.getElementById(id).value;
+
+  const _setInnerText = (id, value) => { document.getElementById(id).innerText = value; };
 
   const _printMetrics = () => {
-    _setValue('people_count', _sim.agentCount);
-    _setValue('alive_count', _sim.agentAliveCount);
-    _setValue('healthy_count', _sim.agentHealthyCount);
-    _setValue('infected_count', _sim.agentInfectedCount);
-    _setValue('dead_count', _sim.agentDeadCount);
-    _setValue('buried_count', _sim.agentBuriedCount);
-    _setValue('day_number', _sim.currentStep + 1);
+    _setInnerText('people_count', _sim.agentCount);
+    _setInnerText('alive_count', _sim.agentAliveCount);
+    _setInnerText('healthy_count', _sim.agentHealthyCount);
+    _setInnerText('infected_count', _sim.agentInfectedCount);
+    _setInnerText('dead_count', _sim.agentDeadCount);
+    _setInnerText('buried_count', _sim.agentBuriedCount);
+    _setInnerText('day_number', _sim.currentStep + 1);
   };
 
   const _getAgentColour = (agent) => {
@@ -114,5 +115,11 @@ const UI = (() => { // eslint-disable-line no-unused-vars
     setup: _setup,
     render: _render,
     setSim: _setSim,
+    inputs: {
+      densityRate: () => parseFloat(_getValue('density_rate')),
+      infectedRate: () => parseFloat(_getValue('infected_rate')),
+      speedModifier: () => parseFloat(_getValue('speed_modifier')),
+      // randomSeed: () => _getValue('random_seed'),
+    },
   };
 })();
