@@ -4,11 +4,23 @@ env:
 extends:
   - airbnb-base
 globals:
-  Atomics: readonly
-  SharedArrayBuffer: readonly
+  RNG: readonly
+  PIXI: readonly
+  Sim: readonly
+  Agent: readonly
 parserOptions:
   ecmaVersion: 2018
-rules: {}
 ignorePatterns:
   - lib/*
   - node_modules/
+rules:
+  func-names:
+    - error
+  no-underscore-dangle:
+    - off
+  no-plusplus:
+    - error
+    - allowForLoopAfterthoughts: true
+  no-param-reassign:
+    - error
+    - props: false

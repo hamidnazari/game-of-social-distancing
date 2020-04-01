@@ -1,23 +1,24 @@
-var RNG = (() => {
+const RNG = (() => { // eslint-disable-line no-unused-vars
   const SEED = 'CoViD-19';
 
-  const rng = new Math.seedrandom(SEED);
+  // const _rng = Math.random; // Pseudo Random
+  const _rng = new Math.seedrandom(SEED); // eslint-disable-line new-cap
 
   return {
-    random: rng,
-    randNumber: function(min, max) {
-      return rng() * (max - min) + min;
+    random: _rng,
+    randNumber(min, max) {
+      return _rng() * (max - min) + min;
     },
-    randInteger: function(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(rng() * (max - min)) + min;
+    randInteger(min, max) {
+      const lo = Math.ceil(min);
+      const hi = Math.floor(max);
+      return Math.floor(_rng() * (hi - lo)) + lo;
     },
-    randFalse: function(weight=0.5) {
-      return rng() >= weight;
+    randFalse(weight = 0.5) {
+      return _rng() >= weight;
     },
-    randTrue: function(weight=0.5) {
-      return rng() < weight;
-    }
-  }
+    randTrue(weight = 0.5) {
+      return _rng() < weight;
+    },
+  };
 })();

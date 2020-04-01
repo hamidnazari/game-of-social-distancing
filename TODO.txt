@@ -1,6 +1,7 @@
 [X] Add seeding for Random
 [/] Use PIXI timer?
 [ ] Colors: Metro UI Colors
+    0x000000 // black
     0xE6E6EA // gray
     0xF4F4F8 // white
     0x0392CF // blue
@@ -15,5 +16,9 @@
 [X] Add death
 [ ] Add asymptomatic/symptomatic
 [ ] Put grid and agents in their own pixi containers
-[ ] Fix the density bug
+    const grid = new PIXI.Container();
+    const agents = new PIXI.Container();
+    pixi.stage.addChild(grid);
+    pixi.stage.addChild(agents);
+[/] Fix the density bug (wasn't a bug)
 [ ] Build a nicer user interface
