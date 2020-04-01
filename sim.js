@@ -18,9 +18,16 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
   };
 
   const _count = (sim) => {
-    sim.agentInfectedCount = sim.agents.filter((a) => a.isInfected()).length;
-    sim.agentDeadCount = sim.agents.filter((a) => a.isDead()).length;
-    sim.agentBuriedCount = sim.agents.filter((a) => a.isBuried()).length;
+    sim.agentInfectedCount = 0;
+    sim.agentDeadCount = 0;
+    sim.agentBuriedCount = 0;
+
+    sim.agents.forEach((a) => {
+      if (a.isInfected()) sim.agentInfectedCount += 1;
+      else if (a.isDead()) sim.agentDeadCount += 1;
+      else if (a.isBuried()) sim.agentBuriedCount += 1;
+    });
+
     sim.agentAliveCount = sim.agentCount - sim.agentDeadCount - sim.agentBuriedCount;
     sim.agentHealthyCount = sim.agentAliveCount - sim.agentInfectedCount;
   };

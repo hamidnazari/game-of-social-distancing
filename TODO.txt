@@ -22,4 +22,6 @@
     pixi.stage.addChild(agents);
 [/] Fix the density bug (wasn't a bug)
 [ ] Build a nicer user interface
-[ ] Stop sim after all agents are dead
+[ ] Stop sim after all agents are buried or healthy
+[ ] Add an effect (fadein/out?) effect to smoothen agent
+    movements and transitions
