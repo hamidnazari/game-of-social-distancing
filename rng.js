@@ -1,10 +1,13 @@
 const RNG = (() => { // eslint-disable-line no-unused-vars
-  const SEED = 'CoViD-19';
+  let _rng;
 
-  // const _rng = Math.random; // Pseudo Random
-  const _rng = new Math.seedrandom(SEED); // eslint-disable-line new-cap
+  const _seed = (seed) => {
+    // _rng = Math.random; // Pseudo Random
+    _rng = new Math.seedrandom(seed); // eslint-disable-line new-cap
+  };
 
   return {
+    seed: _seed,
     random: _rng,
     randNumber(min, max) {
       return _rng() * (max - min) + min;

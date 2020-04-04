@@ -15,8 +15,8 @@
   <p id="controls">
     <strong>Density Rate:</strong> <input type="text" id="density_rate" value="0.5" /> |
     <strong>Initial Infected Rate:</strong> <input type="text" id="infected_rate" value="0.001" /> |
-    <strong>Speed Modifier:</strong> <input type="text" id="speed_modifier" value="2" /> |
-    <!-- <strong>Random Seed:</strong> <input type="text" id="random_seed" value="CoViD-19" /> | -->
+    <strong>Speed Modifier:</strong> <input type="text" id="speed_modifier" value="0.5" /> |
+    <strong>Random Seed:</strong> <input type="text" id="random_seed" value="CoViD-19" /> |
     <input type="button" id="restart" value="Restart" />
   </p>
 
@@ -40,7 +40,7 @@
       <li>An agent (sim person) can appear (blue) in a cell based on "Density Rate";</li>
       <li>That agent has a percentage chance of being infected (yellow), "Initial Infected Rate";</li>
       <li>Each agent can move in 9 possible directions, picked at random;</li>
-      <li>If two or more agents end up on the same cell, that's a clos contact event;</li>
+      <li>If two or more agents end up on the same cell, that's a close contact event;</li>
       <li>If any agents in close contact is infected, the other agents in the same group get infected;</li>
       <li>Agents die (black) after a certain number of days being infected;</li>
       <li>Dead agents are buried (disappear) after a certain number of days after dying.</li>

@@ -119,7 +119,7 @@ const UI = (() => { // eslint-disable-line no-unused-vars
       densityRate: () => parseFloat(_getValue('density_rate')),
       infectedRate: () => parseFloat(_getValue('infected_rate')),
       speedModifier: () => parseFloat(_getValue('speed_modifier')),
-      // randomSeed: () => _getValue('random_seed'),
+      randomSeed: () => _getValue('random_seed'),
     },
   };
 })();
