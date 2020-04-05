@@ -61,6 +61,8 @@ const UI = (() => { // eslint-disable-line no-unused-vars
       colour = 0xFCA903;
     } else if (agent.isDead()) {
       colour = 0x000000;
+    } else if (agent.isBuried()) {
+      colour = 0xCCCCCC;
     }
 
     return colour;
@@ -68,10 +70,7 @@ const UI = (() => { // eslint-disable-line no-unused-vars
 
   const _drawAgents = () => {
     _gfx.lineStyle(0);
-
     _sim.agents.forEach((agent) => {
-      if (agent.isBuried()) return;
-
       _gfx.beginFill(_getAgentColour(agent))
         .drawCircle(
           (agent.x + 0.5) * CELL_SIZE,

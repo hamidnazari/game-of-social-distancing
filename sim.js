@@ -6,8 +6,7 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
     for (let i = 0; i < rows; ++i) {
       for (let j = 0; j < cols; ++j) {
         if (RNG.randTrue(densityRate)) {
-          const health = RNG.randTrue(infectedRate) ? 1 : 0;
-          const agent = new Agent(j, i, health);
+          const agent = new Agent(j, i, RNG.randFalse(infectedRate));
           agents.push(agent);
         }
       }
@@ -52,7 +51,7 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
     const closeContacts = Object.values(placements).filter((p) => p.length > 1);
     closeContacts.forEach((idiots) => {
       if (idiots.find((idiot) => idiot.isInfected())) {
-        idiots.forEach((fucked) => { fucked.health = 1; });
+        idiots.forEach((fucked) => { fucked.setInfected(); });
       }
     });
   };

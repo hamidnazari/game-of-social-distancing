@@ -25,3 +25,6 @@ rules:
   no-param-reassign:
     - error
     - props: false
+  no-unused-expressions:
+    - error
+    - allowTernary: true

@@ -12,7 +12,8 @@
 [ ] Add controls UI
 [X] Add boundaries to Agent?
 [ ] Add enums
-[ ] Add recoverability
+[X] Add recoverability
+[X] Add recoverability UI input
 [X] Add death
 [ ] Add asymptomatic/symptomatic
 [ ] Put grid and agents in their own pixi containers

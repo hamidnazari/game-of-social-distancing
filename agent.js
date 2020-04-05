@@ -1,6 +1,7 @@
 const Agent = (() => { // eslint-disable-line no-unused-vars
-  const MAX_INFECTED_DAYS = 30;
-  const MAX_DEAD_DAYS = 10;
+  const MAX_INFECTED_DAYS = 15;
+  const MAX_UNBURIED_DAYS = 7;
+  const RECOVERABILITY = 0.5;
 
   /*
     Health statuses:
@@ -9,52 +10,74 @@ const Agent = (() => { // eslint-disable-line no-unused-vars
       2 DEAD
       3 BURIED
   */
-  function _Agent(x, y, health) {
+  function _Agent(x, y, isHealthy) {
     this.x = x;
     this.y = y;
-    this.daysInfected = 0;
-    this.daysDead = 0;
-    this.health = health;
+    this.health = 0;
+    isHealthy ? this.setHealthy() : this.setInfected();
   }
 
   _Agent.prototype.getPosition = function getPosition(cols) {
     return this.x + this.y * cols;
   };
 
+  _Agent.prototype.setHealthy = function setInfected() {
+    this.health = 0;
+    this.daysInfected = 0;
+  };
+
+  _Agent.prototype.setInfected = function setInfected() {
+    if (this.health === 0) {
+      this.health = 1;
+      this.daysInfected = 0;
+    }
+  };
+
   _Agent.prototype.isInfected = function isInfected() {
     return this.health === 1;
+  };
+
+  _Agent.prototype.setDead = function setDead() {
+    this.health = 2;
+    this.daysDead = 0;
   };
 
   _Agent.prototype.isDead = function isDead() {
     return this.health === 2;
   };
 
+  _Agent.prototype.setBuried = function setBuried() {
+    if (this.health === 2) {
+      this.health = 3;
+    }
+  };
+
   _Agent.prototype.isBuried = function isBuried() {
     return this.health === 3;
   };
 
-  _Agent.prototype.deteriorate = function deteriorate() {
+  _Agent.prototype.stepHealth = function stepHealth() {
     if (this.isDead()) {
       this.daysDead += 1;
 
-      if (this.daysDead >= MAX_DEAD_DAYS) {
-        this.health = 3;
+      if (this.daysDead >= MAX_UNBURIED_DAYS) {
+        this.setBuried();
       }
-
-      return;
-    }
-
-    if (this.isInfected()) {
+    } else if (this.isInfected()) {
       this.daysInfected += 1;
 
       if (this.daysInfected >= MAX_INFECTED_DAYS) {
-        this.health = 2;
+        RNG.randTrue(RECOVERABILITY) ? this.setHealthy() : this.setDead();
       }
     }
   };
 
+  _Agent.prototype.isDeactivated = function isDeactivated() {
+    return this.isDead() || this.isBuried();
+  };
+
   _Agent.prototype.update = function update(cols, rows) {
-    this.deteriorate();
+    this.stepHealth();
     this.step(cols, rows);
   };
 
@@ -65,7 +88,7 @@ const Agent = (() => { // eslint-disable-line no-unused-vars
       6  7  8
   */
   _Agent.prototype.step = function step(cols, rows) {
-    if (this.isDead()) return;
+    if (this.isDeactivated()) return;
 
     const direction = RNG.randInteger(0, 9);
 
