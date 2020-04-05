@@ -2,26 +2,35 @@
   const COLS = 128;
   const ROWS = 80;
 
-  let _sim;
+  const _tick = (sim) => {
+    sim.update();
+    UI.render();
+  };
 
-  const _tick = () => {
-    _sim.update();
+  const _setup = (callback) => {
+    RNG.seed(UI.inputs.getRandomSeed());
+    const sim = new Sim({
+      cols: COLS,
+      rows: ROWS,
+      densityRate: UI.inputs.getDensityRate(),
+      infectedRate: UI.inputs.getInfectedRate(),
+      recoverabilityRate: UI.inputs.getRecoverabilityRate(),
+    });
+    callback(sim);
     UI.render();
   };
 
   const _restart = () => {
-    RNG.seed(UI.inputs.randomSeed());
-    _sim = new Sim(COLS, ROWS, UI.inputs.densityRate(), UI.inputs.infectedRate());
-    UI.setSim(_sim);
-    UI.render();
+    _setup((sim) => {
+      UI.setSim(sim);
+    });
   };
 
-  const setup = () => {
-    RNG.seed(UI.inputs.randomSeed());
-    _sim = new Sim(COLS, ROWS, UI.inputs.densityRate(), UI.inputs.infectedRate());
-    UI.setup(_sim, _tick, _restart, true);
-    UI.render();
+  const run = () => {
+    _setup((sim) => {
+      UI.setup(sim, _tick, _restart);
+    });
   };
 
-  setup();
+  run();
 })();

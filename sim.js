@@ -2,12 +2,17 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
   const MAX_STEPS = 365 * 3;
   const TRANSMISSION_RATE = 0.8;
 
-  const _initAgents = (cols, rows, densityRate, infectedRate) => {
+  const _initAgents = (options) => {
     const agents = [];
-    for (let i = 0; i < rows; ++i) {
-      for (let j = 0; j < cols; ++j) {
-        if (RNG.randTrue(densityRate)) {
-          const agent = new Agent(j, i, RNG.randFalse(infectedRate));
+    for (let i = 0; i < options.rows; ++i) {
+      for (let j = 0; j < options.cols; ++j) {
+        if (RNG.randTrue(options.densityRate)) {
+          const agent = new Agent({
+            x: j,
+            y: i,
+            isHealthy: RNG.randFalse(options.infectedRate),
+            recoverabilityRate: options.recoverabilityRate,
+          });
           agents.push(agent);
         }
       }
@@ -30,11 +35,11 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
     sim.agentHealthyCount = sim.agentAliveCount - sim.agentInfectedCount;
   };
 
-  function _Sim(cols, rows, densityRate, infectedRate) {
+  function _Sim(options) {
     this.currentStep = 0;
-    this.cols = cols;
-    this.rows = rows;
-    this.agents = _initAgents(cols, rows, densityRate, infectedRate);
+    this.cols = options.cols;
+    this.rows = options.rows;
+    this.agents = _initAgents(options);
     this.agentCount = this.agents.length;
     _count(this);
   }

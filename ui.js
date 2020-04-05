@@ -11,8 +11,8 @@ const UI = (() => { // eslint-disable-line no-unused-vars
     if (_timer) {
       window.clearInterval(_timer);
     }
-    const milliseconds = SPEED_COEFF / UI.inputs.speedModifier();
-    _timer = window.setInterval(_gameTick, milliseconds);
+    const milliseconds = SPEED_COEFF / UI.inputs.getSpeedModifier();
+    _timer = window.setInterval(_gameTick, milliseconds, _sim);
   };
 
   const _setupCanvas = () => {
@@ -115,10 +115,11 @@ const UI = (() => { // eslint-disable-line no-unused-vars
     render: _render,
     setSim: _setSim,
     inputs: {
-      densityRate: () => parseFloat(_getValue('density_rate')),
-      infectedRate: () => parseFloat(_getValue('infected_rate')),
-      speedModifier: () => parseFloat(_getValue('speed_modifier')),
-      randomSeed: () => _getValue('random_seed'),
+      getDensityRate: () => parseFloat(_getValue('density_rate')),
+      getInfectedRate: () => parseFloat(_getValue('infected_rate')),
+      getRecoverabilityRate: () => parseFloat(_getValue('recoverability_rate')),
+      getSpeedModifier: () => parseFloat(_getValue('speed_modifier')),
+      getRandomSeed: () => _getValue('random_seed'),
     },
   };
 })();

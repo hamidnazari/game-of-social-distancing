@@ -10,18 +10,19 @@
   <script src="lib/seedrandom.min.js"></script>
 </head>
 <body>
-  <h1>Game of Social Distancing (alpha)</h1>
+  <h1>Game of Social Distancing (alpha 2020.04.05)</h1>
 
   <p id="controls">
     <strong>Density Rate:</strong> <input type="text" id="density_rate" value="0.2" /> |
     <strong>Initial Infected Rate:</strong> <input type="text" id="infected_rate" value="0.01" /> |
-    <strong>Speed Modifier:</strong> <input type="text" id="speed_modifier" value="4" /> |
+    <strong>Recoverability Rate:</strong> <input type="text" id="recoverability_rate" value="0.5" /> |
+    <strong>Speed Modifier:</strong> <input type="text" id="speed_modifier" value="10" /> |
     <strong>Random Seed:</strong> <input type="text" id="random_seed" value="CoViD-19" /> |
     <input type="button" id="restart" value="Restart" />
   </p>
 
   <p id="metrics">
-    <strong>People Count:</strong> <span id="people_count"></span> |
+    <strong>Initial People Count:</strong> <span id="people_count"></span> |
     <strong>Alive Count:</strong> <span id="alive_count"></span> |
     <strong>Healthy Count:</strong> <span id="healthy_count"></span> |
     <strong>Infected Count:</strong> <span id="infected_count"></span> |
@@ -37,18 +38,19 @@
     Rules are simple:
     <ol>
       <li>The world is a grid of X * Y cells;</li>
-      <li>An agent (sim person) can appear (blue) in a cell based on "Density Rate";</li>
-      <li>That agent has a percentage chance of being infected (yellow), "Initial Infected Rate";</li>
-      <li>Each agent can move in 9 possible directions, picked at random;</li>
+      <li>An agent (sim person) can appear (blue) in a cell based on <em>"Density Rate"</em>;</li>
+      <li>That agent has a percentage chance of being infected (yellow), <em>"Initial Infected Rate"</em>;</li>
+      <li>Each agent can move in 9 possible directions picked at random;</li>
       <li>If two or more agents end up on the same cell, that's a close contact event;</li>
-      <li>If any agents in close contact is infected, the other agents in the same group get infected;</li>
-      <li>Agents die (black) after a certain number of days being infected;</li>
-      <li>Dead agents are buried (disappear) after a certain number of days after dying.</li>
+      <li>If any agents in close contact is infected, the other healthy agents in the same group may get infected depending on <em>"Transmission Rate"</em>;</li>
+      <li>After the <em>"Infection Period"</em> is over, agents either recover (blue) or die (black);</li>
+      <li>Dead agents are buried (light grey) after a certain number of days after dying.</li>
     </ol>
   </p>
 
   <p>
-    Contributions are most welcome. Have a look at TODO.txt for ideas. <a href="https://github.com/hamidnazari/game-of-social-distancing" target="_blank">https://github.com/hamidnazari/game-of-social-distancing</a>
+    Contributions are most welcome. Have a look at TODO.txt for ideas.
+    <a href="https://github.com/hamidnazari/game-of-social-distancing" target="_blank">https://github.com/hamidnazari/game-of-social-distancing</a>
   </p>
 
   <script src="rng.js?v=0.1.0"></script>

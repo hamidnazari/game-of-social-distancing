@@ -1,7 +1,6 @@
 const Agent = (() => { // eslint-disable-line no-unused-vars
   const MAX_INFECTED_DAYS = 15;
   const MAX_UNBURIED_DAYS = 7;
-  const RECOVERABILITY = 0.5;
 
   /*
     Health statuses:
@@ -10,11 +9,12 @@ const Agent = (() => { // eslint-disable-line no-unused-vars
       2 DEAD
       3 BURIED
   */
-  function _Agent(x, y, isHealthy) {
-    this.x = x;
-    this.y = y;
+  function _Agent(options) {
+    this.x = options.x;
+    this.y = options.y;
+    this.recoverabilityRate = options.recoverabilityRate;
     this.health = 0;
-    isHealthy ? this.setHealthy() : this.setInfected();
+    options.isHealthy ? this.setHealthy() : this.setInfected();
   }
 
   _Agent.prototype.getPosition = function getPosition(cols) {
@@ -67,7 +67,7 @@ const Agent = (() => { // eslint-disable-line no-unused-vars
       this.daysInfected += 1;
 
       if (this.daysInfected >= MAX_INFECTED_DAYS) {
-        RNG.randTrue(RECOVERABILITY) ? this.setHealthy() : this.setDead();
+        RNG.randTrue(this.recoverabilityRate) ? this.setHealthy() : this.setDead();
       }
     }
   };
