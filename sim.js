@@ -56,8 +56,13 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
     });
   };
 
+  _Sim.prototype.isOver = function isOver() {
+    return (this.agentInfectedCount === 0 && this.agentDeadCount === 0)
+           || this.currentStep >= MAX_STEPS;
+  };
+
   _Sim.prototype.update = function update() {
-    if (this.currentStep >= MAX_STEPS) return;
+    if (this.isOver()) return;
 
     this.agents.forEach((agent) => agent.update(this.cols, this.rows));
 

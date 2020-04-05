@@ -51,7 +51,7 @@ const UI = (() => { // eslint-disable-line no-unused-vars
     _setInnerText('infected_count', _sim.agentInfectedCount);
     _setInnerText('dead_count', _sim.agentDeadCount);
     _setInnerText('buried_count', _sim.agentBuriedCount);
-    _setInnerText('day_number', _sim.currentStep + 1);
+    _setInnerText('day_number', _sim.currentStep);
   };
 
   const _getAgentColour = (agent) => {
