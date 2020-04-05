@@ -14,6 +14,7 @@
       rows: ROWS,
       densityRate: UI.inputs.getDensityRate(),
       infectedRate: UI.inputs.getInfectedRate(),
+      transmissionRate: UI.inputs.getTransmissionRate(),
       recoverabilityRate: UI.inputs.getRecoverabilityRate(),
       infectionPeriod: UI.inputs.getInfectionPeriod(),
     });

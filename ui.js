@@ -117,6 +117,7 @@ const UI = (() => { // eslint-disable-line no-unused-vars
     inputs: {
       getDensityRate: () => parseFloat(_getValue('density_rate')),
       getInfectedRate: () => parseFloat(_getValue('infected_rate')),
+      getTransmissionRate: () => parseFloat(_getValue('transmission_rate')),
       getRecoverabilityRate: () => parseFloat(_getValue('recoverability_rate')),
       getInfectionPeriod: () => parseInt(_getValue('infection_period')),
       getSpeedModifier: () => parseFloat(_getValue('speed_modifier')),

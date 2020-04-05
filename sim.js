@@ -1,6 +1,5 @@
 const Sim = (() => { // eslint-disable-line no-unused-vars
   const MAX_STEPS = 365 * 3;
-  const TRANSMISSION_RATE = 0.8;
 
   const _initAgents = (options) => {
     const agents = [];
@@ -40,6 +39,7 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
     this.currentStep = 0;
     this.cols = options.cols;
     this.rows = options.rows;
+    this.transmissionRate = options.transmissionRate;
     this.agents = _initAgents(options);
     this.agentCount = this.agents.length;
     _count(this);
@@ -59,7 +59,7 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
     closeContacts.forEach((idiots) => {
       if (idiots.find((idiot) => idiot.isInfected())) {
         idiots.forEach((fucked) => {
-          if (RNG.randTrue(TRANSMISSION_RATE)) {
+          if (RNG.randTrue(sim.transmissionRate)) {
             fucked.setInfected();
           }
         });
