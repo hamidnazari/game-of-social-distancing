@@ -15,6 +15,7 @@
       densityRate: UI.inputs.getDensityRate(),
       infectedRate: UI.inputs.getInfectedRate(),
       recoverabilityRate: UI.inputs.getRecoverabilityRate(),
+      infectionPeriod: UI.inputs.getInfectionPeriod(),
     });
     callback(sim);
     UI.render();

@@ -1,5 +1,4 @@
 const Agent = (() => { // eslint-disable-line no-unused-vars
-  const MAX_INFECTED_DAYS = 15;
   const MAX_UNBURIED_DAYS = 7;
 
   /*
@@ -13,6 +12,7 @@ const Agent = (() => { // eslint-disable-line no-unused-vars
     this.x = options.x;
     this.y = options.y;
     this.recoverabilityRate = options.recoverabilityRate;
+    this.infectionPeriod = options.infectionPeriod;
     this.health = 0;
     options.isHealthy ? this.setHealthy() : this.setInfected();
   }
@@ -66,7 +66,7 @@ const Agent = (() => { // eslint-disable-line no-unused-vars
     } else if (this.isInfected()) {
       this.daysInfected += 1;
 
-      if (this.daysInfected >= MAX_INFECTED_DAYS) {
+      if (this.daysInfected >= this.infectionPeriod) {
         RNG.randTrue(this.recoverabilityRate) ? this.setHealthy() : this.setDead();
       }
     }

@@ -12,6 +12,7 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
             y: i,
             isHealthy: RNG.randFalse(options.infectedRate),
             recoverabilityRate: options.recoverabilityRate,
+            infectionPeriod: options.infectionPeriod,
           });
           agents.push(agent);
         }
