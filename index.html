@@ -5,21 +5,25 @@
   <title>Game of Social Distancing</title>
   <meta name="description" content="Game of Social Distancing">
   <meta name="author" content="Hamid Nazari">
-  <link rel="stylesheet" href="styles.css?v=1.0">
+  <link rel="stylesheet" href="styles.css?v=0.1.1">
   <script src="lib/pixi.min.js"></script>
   <script src="lib/seedrandom.min.js"></script>
 </head>
 <body>
   <h1>Game of Social Distancing (alpha 2020.04.05)</h1>
+  <p>
+    This is a little cellular automaton inspired by <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a>.
+    Scroll down to read the rules.
+  </p>
 
   <p id="controls">
-    <strong>Density Rate:</strong> <input type="text" id="density_rate" value="0.2" /> |
-    <strong>Initial Infected Rate:</strong> <input type="text" id="infected_rate" value="0.01" /> |
-    <strong>Transmission Rate:</strong> <input type="text" id="transmission_rate" value="0.8" /> |
-    <strong>Recoverability Rate:</strong> <input type="text" id="recoverability_rate" value="0.5" /> |
-    <strong>Infection Period:</strong> <input type="text" id="infection_period" value="15" /> |
-    <strong>Speed Modifier:</strong> <input type="text" id="speed_modifier" value="10" /> |
-    <strong>Random Seed:</strong> <input type="text" id="random_seed" value="CoViD-19" /> |
+    <label for="density_rate" title="Chance of an agent being created in each cell.">Density Rate %</label> <input type="text" id="density_rate" value="20" /> |
+    <label for="infected_rate" title="Chance of a new agent being infected initially, as opposed to being healthy.">Initial Infected Rate %</label> <input type="text" id="infected_rate" value="1" /> |
+    <label for="transmission_rate" title="Chance of transmission in case of a close contact event.">Transmission Rate %</label> <input type="text" id="transmission_rate" value="80" /> |
+    <label for="recoverability_rate" title="Chance of recovery at the end of infection period, as opposed to death.">Recoverability Rate %</label> <input type="text" id="recoverability_rate" value="50" /> |
+    <label for="infection_period" title="Number of days an infection lasts until it's resolved.">Infection Period:</label> <input type="text" id="infection_period" value="15" /> |
+    <label for="speed_modifier" title="Number of days in each second.">Speed Modifier:</label> <input type="text" id="speed_modifier" value="10" /> |
+    <label for="random_seed" title="Events are not exactly random. You can reproduce a random sequence by reusing the same seed. Alternatively change the seed to produce different results.">Random Seed:</label> <input type="text" id="random_seed" value="CoViD-19" /> |
     <input type="button" id="restart" value="Restart" />
   </p>
 
@@ -35,7 +39,6 @@
 
   <div id="pixi"></div>
 
-  <p>This is a little fun simulation inspired by <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a>.</p>
   <p>
     Rules are simple:
     <ol>
@@ -47,6 +50,7 @@
       <li>If any agents in close contact is infected, the other healthy agents in the same group may get infected depending on <em>"Transmission Rate"</em>;</li>
       <li>After the <em>"Infection Period"</em> is over, agents either recover (blue) or die (black);</li>
       <li>Dead agents are buried (light grey) after a certain number of days after dying.</li>
+      <li>Simulation stops when number of infected and recently died agents reach zero, or when the maximum number of days (currently set to 3 years) is reached.</li>
     </ol>
   </p>
 
@@ -55,10 +59,10 @@
     <a href="https://github.com/hamidnazari/game-of-social-distancing" target="_blank">https://github.com/hamidnazari/game-of-social-distancing</a>
   </p>
 
-  <script src="rng.js?v=0.1.0"></script>
-  <script src="agent.js?v=0.1.0"></script>
-  <script src="sim.js?v=0.1.0"></script>
-  <script src="ui.js?v=0.1.0"></script>
-  <script src="game.js?v=0.1.0"></script>
+  <script src="rng.js?v=0.1.1"></script>
+  <script src="agent.js?v=0.1.1"></script>
+  <script src="sim.js?v=0.1.1"></script>
+  <script src="ui.js?v=0.1.1"></script>
+  <script src="game.js?v=0.1.1"></script>
 </body>
 </html>

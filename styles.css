@@ -6,3 +6,8 @@ body {
 input[type=text] {
   width: 60px;
 }
+
+label {
+  text-decoration: underline dotted;
+  cursor: pointer;
+}

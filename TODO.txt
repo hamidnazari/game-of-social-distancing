@@ -13,9 +13,9 @@
 [X] Add boundaries to Agent?
 [ ] Add enums
 [X] Add recoverability
-[ ] Add recoverability UI input
-[ ] Add transmission rate UI input
-[ ] Add infection period UI input
+[X] Add recoverability UI input
+[X] Add transmission rate UI input
+[X] Add infection period UI input
 [X] Add death
 [ ] Add asymptomatic/symptomatic
 [ ] Put grid and agents in their own pixi containers
@@ -31,4 +31,8 @@
 [X] Fix random seed UI restart issue
 [X] Add a variable for rate of transmission
 [ ] Add pause / step buttons
-[ ] Add tooltips to input labels
+[X] Add tooltips to input labels
+[ ] Add immunity?
+    - Agents are either vaccinated
+    - Agents become immune after recovering for the first time
+    - Immunity brings chance of getting infected by X%
