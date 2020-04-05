@@ -1,5 +1,6 @@
 const Sim = (() => { // eslint-disable-line no-unused-vars
   const MAX_STEPS = 365 * 3;
+  const TRANSMISSION_RATE = 0.8;
 
   const _initAgents = (cols, rows, densityRate, infectedRate) => {
     const agents = [];
@@ -51,7 +52,11 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
     const closeContacts = Object.values(placements).filter((p) => p.length > 1);
     closeContacts.forEach((idiots) => {
       if (idiots.find((idiot) => idiot.isInfected())) {
-        idiots.forEach((fucked) => { fucked.setInfected(); });
+        idiots.forEach((fucked) => {
+          if (RNG.randTrue(TRANSMISSION_RATE)) {
+            fucked.setInfected();
+          }
+        });
       }
     });
   };

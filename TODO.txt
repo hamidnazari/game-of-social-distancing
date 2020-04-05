@@ -9,11 +9,13 @@
     0xFFC425 // yellow
 [X] Fix last agent line style bug
 [X] Add live metrics
-[ ] Add controls UI
+[X] Add controls UI
 [X] Add boundaries to Agent?
 [ ] Add enums
 [X] Add recoverability
-[X] Add recoverability UI input
+[ ] Add recoverability UI input
+[ ] Add transmission rate UI input
+[ ] Add infection period UI input
 [X] Add death
 [ ] Add asymptomatic/symptomatic
 [ ] Put grid and agents in their own pixi containers
@@ -27,6 +29,6 @@
 [ ] Add an effect (fadein/out?) effect to smoothen agent
     movements and transitions
 [X] Fix random seed UI restart issue
-[ ] Add a variable for rate of transmission
+[X] Add a variable for rate of transmission
 [ ] Add pause / step buttons
 [ ] Add tooltips to input labels
