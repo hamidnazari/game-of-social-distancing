@@ -1,27 +1,24 @@
 const RNG = (() => { // eslint-disable-line no-unused-vars
   let _rng;
 
-  const _seed = (seed) => {
-    // _rng = Math.random; // Pseudo Random
-    _rng = new Math.seedrandom(seed); // eslint-disable-line new-cap
-  };
-
   return {
-    seed: _seed,
-    random: _rng,
-    randNumber(min, max) {
-      return _rng() * (max - min) + min;
+    seed: (seed = 0) => {
+      _rng = new Math.seedrandom(seed); // eslint-disable-line new-cap
     },
-    randInteger(min, max) {
+    random: () => _rng(),
+    randNumber(min = 0, max = 100) {
+      return this.random() * (max - min) + min;
+    },
+    randInteger(min = 0, max = 100) {
       const lo = Math.ceil(min);
       const hi = Math.floor(max);
-      return Math.floor(_rng() * (hi - lo)) + lo;
+      return Math.floor(this.random() * (hi - lo)) + lo;
     },
     randFalse(weight = 0.5) {
-      return _rng() >= weight;
+      return this.random() >= weight;
     },
     randTrue(weight = 0.5) {
-      return _rng() < weight;
+      return this.random() < weight;
     },
   };
 })();

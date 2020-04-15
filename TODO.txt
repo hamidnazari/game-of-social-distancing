@@ -36,3 +36,22 @@
     - Agents are either vaccinated
     - Agents become immune after recovering for the first time
     - Immunity brings chance of getting infected by X%
+[/] Simple smoke test:
+        Input:
+            - Density Rate: %20
+            - Initial Infected Rate: %1
+            - Transmission Rate: %80
+            - Recoverability Rate: %50
+            - Infection Period: 15
+            - Speed Modifier: 10
+            - Random Seed: CoViD-19
+        Output:
+            - Initial People Count: 2101
+            - Alive Count: 1031
+            - Healthy Count: 1031
+            - Infected Count: 0
+            - Recently Died Count: 0
+            - Buried Count: 1070
+            - Day Number: 510
+
+
