@@ -5,42 +5,121 @@
   <title>Game of Social Distancing</title>
   <meta name="description" content="Game of Social Distancing">
   <meta name="author" content="Hamid Nazari">
-  <link rel="stylesheet" href="styles.css?v=0.1.1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+  <link rel="stylesheet" href="styles.css">
+
   <script src="lib/pixi.min.js"></script>
   <script src="lib/seedrandom.min.js"></script>
 </head>
 <body>
-  <h1>Game of Social Distancing (alpha 2020.04.05)</h1>
-  <p>
-    This is a little cellular automaton inspired by <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a>.
+  <h1 class="title">Game of Social Distancing</h1>
+  <h5 class="subtitle is-5">
+    A cellular automaton inspired by <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Conway's Game of Life</a>.
     Scroll down to read the rules.
-  </p>
+    (alpha 2020.04.21)
+  </h5>
 
-  <p id="controls">
-    <label for="density_rate" title="Chance of an agent being created in each cell.">Density Rate %</label> <input type="text" id="density_rate" value="20" /> |
-    <label for="infected_rate" title="Chance of a new agent being infected initially, as opposed to being healthy.">Initial Infected Rate %</label> <input type="text" id="infected_rate" value="1" /> |
-    <label for="transmission_rate" title="Chance of transmission in case of a close contact event.">Transmission Rate %</label> <input type="text" id="transmission_rate" value="80" /> |
-    <label for="recoverability_rate" title="Chance of recovery at the end of infection period, as opposed to death.">Recoverability Rate %</label> <input type="text" id="recoverability_rate" value="50" /> |
-    <label for="infection_period" title="Number of days an infection lasts until it's resolved.">Infection Period</label> <input type="text" id="infection_period" value="15" /> |
-    <label for="speed_modifier" title="Number of days in each second.">Speed Modifier</label> <input type="text" id="speed_modifier" value="10" /> |
-    <label for="random_seed" title="Events are not exactly random. You can reproduce a random sequence by reusing the same seed. Alternatively change the seed to produce different results.">Random Seed</label> <input type="text" id="random_seed" value="CoViD-19" /> |
-    <input type="button" id="restart" value="Restart" />
-  </p>
+  <nav class="level box" id="controls">
+    <div class="level-item has-text-left">
+      <div class="field">
+      <label class="label" for="density_rate" title="Chance of an agent being created in each cell.">Density Rate %</label>
+      <input type="text" class="input is-small" id="density_rate" value="20" />
+      </div>
+    </div>
+    <div class="level-item has-text-left">
+      <div class="field">
+      <label class="label" for="infected_rate" title="Chance of a new agent being infected initially, as opposed to being healthy.">Initial Infected Rate %</label>
+      <input type="text" class="input is-small" id="infected_rate" value="1" />
+      </div>
+    </div>
+    <div class="level-item has-text-left">
+      <div class="field">
+      <label class="label" for="transmission_rate" title="Chance of transmission in case of a close contact event.">Transmission Rate %</label>
+      <input type="text" class="input is-small" id="transmission_rate" value="80" />
+      </div>
+    </div>
+    <div class="level-item has-text-left">
+      <div class="field">
+      <label class="label" for="recoverability_rate" title="Chance of recovery at the end of infection period, as opposed to death.">Recoverability Rate %</label>
+      <input type="text" class="input is-small" id="recoverability_rate" value="50" />
+      </div>
+    </div>
+    <div class="level-item has-text-left">
+      <div class="field">
+      <label class="label" for="infection_period" title="Number of days an infection lasts until it's resolved.">Infection Period</label>
+      <input type="text" class="input is-small" id="infection_period" value="15" />
+      </div>
+    </div>
+    <div class="level-item has-text-left">
+      <div class="field">
+      <label class="label" for="speed_modifier" title="Number of days in each second.">Speed Modifier</label>
+      <input type="text" class="input is-small" id="speed_modifier" value="10" />
+      </div>
+    </div>
+    <div class="level-item has-text-left">
+      <div class="field">
+      <label class="label" for="random_seed" title="Events are not exactly random. You can reproduce a random sequence by reusing the same seed. Alternatively change the seed to produce different results.">Random Seed</label>
+      <input type="text" class="input is-small" id="random_seed" value="CoViD-19" />
+      </div>
+    </div>
+    <div class="level-item has-text-left">
+      <div class="field">
+        <div class="control">
+          <button type="button" class="button is-link" id="restart">Restart</button>
+        </div>
+      </div>
+    </div>
+  </nav>
 
-  <p id="metrics">
-    <strong>Initial People Count:</strong> <span id="people_count"></span> |
-    <strong>Alive Count:</strong> <span id="alive_count"></span> |
-    <strong>Healthy Count:</strong> <span id="healthy_count"></span> |
-    <strong>Infected Count:</strong> <span id="infected_count"></span> |
-    <strong>Recently Died Count:</strong> <span id="dead_count"></span> |
-    <strong>Buried Count:</strong> <span id="buried_count"></span> |
-    <strong>Day Number:</strong> <span id="day_number"></span>
-  </p>
+  <nav class="level box">
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Initial People Count</p>
+        <p class="title" id="people_count"></p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Alive Count</p>
+        <p class="title" id="alive_count"></p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Healthy Count</p>
+        <p class="title" id="healthy_count"></p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Infected Count</p>
+        <p class="title" id="infected_count"></p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Recently Died Count</p>
+        <p class="title" id="dead_count"></p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Buried Count</p>
+        <p class="title" id="buried_count"></p>
+      </div>
+    </div>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">Day Number</p>
+        <p class="title" id="day_number"></p>
+      </div>
+    </div>
+  </nav>
 
-  <div id="pixi"></div>
+  <div class="box has-text-centered" id="pixi"></div>
 
-  <p>
-    Rules are simple:
+  <div class="content box">
+    <h3 class="title is-4">Rules are simple:</h3>
     <ol>
       <li>The world is a grid of X * Y cells;</li>
       <li>An agent (sim person) can appear (blue) in a cell based on <em>"Density Rate"</em>;</li>
@@ -52,12 +131,11 @@
       <li>Dead agents are buried (light grey) after a certain number of days after dying.</li>
       <li>Simulation stops when number of infected and recently died agents reach zero, or when the maximum number of days (currently set to 3 years) is reached.</li>
     </ol>
-  </p>
-
-  <p>
-    Contributions are most welcome. Have a look at TODO.txt for ideas.
-    <a href="https://github.com/hamidnazari/game-of-social-distancing" target="_blank">https://github.com/hamidnazari/game-of-social-distancing</a>
-  </p>
+    <p>
+        Contributions are most welcome. Have a look at TODO.txt for ideas.
+        <a href="https://github.com/hamidnazari/game-of-social-distancing" target="_blank">https://github.com/hamidnazari/game-of-social-distancing</a>
+    </p>
+  </div>
 
   <script src="rng.js?v=0.1.1"></script>
   <script src="agent.js?v=0.1.1"></script>

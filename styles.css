@@ -1,13 +1,9 @@
 body {
-  /* TODO: Remove background */
   background-color: #fafafa;
+  padding: 1rem 2rem;
 }
 
-input[type=text] {
-  width: 60px;
-}
-
-label {
+#controls label {
   text-decoration: underline dotted;
-  cursor: pointer;
+  cursor: help;
 }
