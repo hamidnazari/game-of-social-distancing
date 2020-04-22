@@ -22,3 +22,5 @@ const RNG = (() => { // eslint-disable-line no-unused-vars
     },
   };
 })();
+
+export default RNG;

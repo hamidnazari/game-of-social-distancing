@@ -1,3 +1,7 @@
+import RNG from './rng';
+import UI from './ui';
+import Sim from './sim';
+
 (() => {
   const COLS = 128;
   const ROWS = 80;

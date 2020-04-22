@@ -125,3 +125,5 @@ const UI = (() => { // eslint-disable-line no-unused-vars
     },
   };
 })();
+
+export default UI;

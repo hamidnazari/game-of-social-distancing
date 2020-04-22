@@ -1,3 +1,5 @@
+import RNG from './rng';
+
 const Agent = (() => { // eslint-disable-line no-unused-vars
   const MAX_UNBURIED_DAYS = 7;
 
@@ -105,3 +107,5 @@ const Agent = (() => { // eslint-disable-line no-unused-vars
 
   return _Agent;
 })();
+
+export default Agent;

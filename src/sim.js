@@ -1,3 +1,6 @@
+import Agent from './agent';
+import RNG from './rng';
+
 const Sim = (() => { // eslint-disable-line no-unused-vars
   const MAX_STEPS = 365 * 3;
 
@@ -85,3 +88,5 @@ const Sim = (() => { // eslint-disable-line no-unused-vars
 
   return _Sim;
 })();
+
+export default Sim;

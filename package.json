@@ -2,15 +2,18 @@
   "name": "game-of-social-distancing",
   "version": "0.1.1",
   "description": "Game of Social Distancing",
-  "main": "game.js",
+  "private": true,
   "dependencies": {},
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-plugin-import": "^2.20.2"
+    "eslint-plugin-import": "^2.20.2",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11"
   },
   "scripts": {
-    "test": "eslint ."
+    "test": "eslint ./src",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
