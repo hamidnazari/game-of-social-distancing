@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   mode: 'production',
+  performance: { hints: false },
   entry: [
       './src/ui.js',
       './src/rng.js',

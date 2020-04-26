@@ -1,3 +1,5 @@
+import * as PIXI from 'pixi.js';
+
 const UI = (() => { // eslint-disable-line no-unused-vars
   const CELL_SIZE = 8;
   const SPEED_COEFF = 1000;

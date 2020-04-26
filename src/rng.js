@@ -1,9 +1,11 @@
+import seedrandom from 'seedrandom';
+
 const RNG = (() => { // eslint-disable-line no-unused-vars
   let _rng;
 
   return {
     seed: (seed = 0) => {
-      _rng = new Math.seedrandom(seed); // eslint-disable-line new-cap
+      _rng = seedrandom(seed); // eslint-disable-line new-cap
     },
     random: () => _rng(),
     randNumber(min = 0, max = 100) {
