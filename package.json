@@ -1,6 +1,6 @@
 {
   "name": "game-of-social-distancing",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Game of Social Distancing",
   "private": true,
   "dependencies": {
@@ -17,7 +17,7 @@
   "scripts": {
     "test": "eslint ./src",
     "build": "webpack",
-    "deploy": "aws s3 sync --delete --acl public-read dist s3://game-of-social-distancing"
+    "deploy": "aws s3 sync --delete --acl public-read dist s3://gosd.ham.id.au &&\naws s3 sync --delete --acl public-read dist s3://game-of-social-distancing"
   },
   "repository": {
     "type": "git",
